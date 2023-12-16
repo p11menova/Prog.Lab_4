@@ -8,8 +8,8 @@ import program.sounds.SoundVolume;
 
 import java.util.Objects;
 
-public class WinniPoo extends Creature implements SingableMammal {
-    public Song song;
+public class WinniPoo extends Mammal implements MakingSoundMammal, ThinkableMammal, SingableMammal {
+    private Song song;
 
     public WinniPoo(String name) {
         super(name);
@@ -18,12 +18,12 @@ public class WinniPoo extends Creature implements SingableMammal {
 
     @Override
     public void changeSong(Song song) {
-        this.song = song;
+        this.setSong(song);
     }
 
     @Override
     public String singSong() {
-        return this.song.getSong();
+        return this.getSong().getSong();
     }
     @Override
     public String singSong(DopAction dopAction) {
@@ -35,12 +35,29 @@ public class WinniPoo extends Creature implements SingableMammal {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinniPoo winniPoo = (WinniPoo) o;
-        return Objects.equals(song, winniPoo.song);
+        return Objects.equals(getSong(), winniPoo.getSong());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), song);
+        return Objects.hash(super.hashCode(), getSong());
     }
 
+    public Song getSong() {
+        return song;
+    }
+
+    public void setSong(Song song) {
+        this.song = song;
+    }
+
+    @Override
+    public String makeSound() {
+        return null;
+    }
+
+    @Override
+    public void setSound(Sound sound) {
+
+    }
 }

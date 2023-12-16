@@ -4,5 +4,5 @@ import program.sounds.Sound;
 
 public interface MakingSoundMammal {
     String makeSound();
-    void addSound(Sound sound);
+    void setSound(Sound sound);
 }

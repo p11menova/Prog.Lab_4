@@ -1,6 +1,6 @@
 package program;
 
-import program.alive.Moveable;
+import program.alive.MovingManager;
 import program.alive.WinniPoo;
 
 import program.inanimate.DopAction;
@@ -15,7 +15,7 @@ import program.thoughts.*;
 
 public class Story {
     private final WinniPoo winni = new WinniPoo("Винни-Пух");
-
+    private MovingManager move_manager;
     private Route route = new Route();
     public void prepare() {
 
@@ -23,22 +23,23 @@ public class Story {
         route.addLocation(new Location("песчаный откос"));
         route.addLocation(new Location("большая дыра"));
 
+
+        move_manager = new MovingManager(route, winni);
         Song song = new Song(SongEnum.GRUMBLING.getSongText(), SoundVolume.UNDERBREATH, SoundVerb.GRUMBLE, SongEnum.GRUMBLING);
 
         winni.changeSong(song);
-        winni.addRoute(route);
         winni.addThought(Thought.WHO_AM_I);
     }
     public void go(){
-        winni.go();
-        // System.out.println(winni.getCurrentLocation());
+        move_manager.go();
+        System.out.println(move_manager.getCurrentLocation());
         System.out.println(winni.singSong(DopAction.THINK));
         System.out.println(winni.think()+". ");
-        winni.go();
-        winni.go();
-//        System.out.printf(winni.getPreviousLocation(Going.UNNOTICED)+ ". ");
-        winni.go();
-        System.out.printf(winni.getPreviousLocation()+".");
+        move_manager.go();
+        move_manager.go();
+        System.out.printf(move_manager.getPreviousLocation(Going.UNNOTICED)+ ". ");
+        move_manager.go();
+        System.out.printf(move_manager.getPreviousLocation()+".");
         System.out.println();
 
         }

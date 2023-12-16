@@ -1,28 +1,33 @@
 package program.alive;
 
-import program.inanimate.Route;
 import program.sounds.Sound;
+import program.sounds.SoundVerb;
+import program.sounds.SoundVolume;
+import program.thoughts.Brain;
+import program.thoughts.Thought;
 
-public abstract class Mammal implements Moveable{
+public abstract class Mammal implements ThinkableMammal{
     protected String name;
-    protected Route route = new Route();
+    private final Brain brain;
+    protected Sound sound = new Sound("sound", SoundVolume.NORMAL, SoundVerb.TALK);
     public Mammal(String name){
         this.name = name;
+        this.brain = new Brain();
     }
-    public void addRoute(Route route){
-        this.route = route;
+    public String get_name(){ return this.name;}
+
+    public void addThought(Thought thought){
+        this.brain.addThought(thought);
     }
 
-    public void go(){
-        this.route.go();
+    public String think(){
+        return this.name + " размышляет о " + this.brain.getThought().getThought_text();
+    }
+    public String makeSound(){
+        return this.name + " " + this.sound.getSound();
+    }
+    public void setSound(Sound sound){
+        this.sound = sound;
     }
 
-    public String getPreviousLocation(){
-        return this.name + " дошёл до  " + this.getPreviousLocation();
-    }
-
-    public String getCurrentLocation(){
-        return this.name + " идёт по " + this.getCurrentLocation();
-
-    }
 }

@@ -31,7 +31,7 @@ public class Route {
             {return this.route.get(this.route.size()-1);}
         return this.route.get(this.currentLocationIndex);
     }
-    public void go(){
+    public void next(){
         this.currentLocationIndex += 1;
     }
 
