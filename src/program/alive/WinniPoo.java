@@ -1,6 +1,8 @@
 package program.alive;
 
-import program.inanimate.DopAction;
+import program.alive.abilities.MakingSoundMammal;
+import program.alive.abilities.SingableMammal;
+import program.exceptions.WinniIsNotInspiredException;
 import program.sounds.Song;
 import program.sounds.Sound;
 import program.sounds.SoundVerb;
@@ -8,7 +10,7 @@ import program.sounds.SoundVolume;
 
 import java.util.Objects;
 
-public class WinniPoo extends Mammal implements MakingSoundMammal, ThinkableMammal, SingableMammal {
+public class WinniPoo extends Mammal implements MakingSoundMammal, SingableMammal {
     private Song song;
 
     public WinniPoo(String name) {
@@ -16,18 +18,16 @@ public class WinniPoo extends Mammal implements MakingSoundMammal, ThinkableMamm
         this.sound = new Sound("Хорошо живет на свете \n Винни-Пух!", SoundVolume.LOUD, SoundVerb.GRUMBLE);;
     }
 
-    @Override
-    public void changeSong(Song song) {
-        this.setSong(song);
-    }
-
-    @Override
-    public String singSong() {
-        return this.getSong().getSong();
+    public static class Honey {
+        public static String getHoney(){
+            return " с горшочком мёда в руках";
+        }
     }
     @Override
-    public String singSong(DopAction dopAction) {
-        return this.singSong() + " и " + dopAction.getAction_name();
+    public String singSong() throws WinniIsNotInspiredException {
+        if (!this.isInspired())
+            throw new WinniIsNotInspiredException("Винни не будет петь( Он не вдохновлён..");
+        else return this.getSong().getSong();
     }
 
     @Override
@@ -37,7 +37,6 @@ public class WinniPoo extends Mammal implements MakingSoundMammal, ThinkableMamm
         WinniPoo winniPoo = (WinniPoo) o;
         return Objects.equals(getSong(), winniPoo.getSong());
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), getSong());
@@ -51,13 +50,12 @@ public class WinniPoo extends Mammal implements MakingSoundMammal, ThinkableMamm
         this.song = song;
     }
 
-    @Override
-    public String makeSound() {
-        return null;
+    public boolean isInspired(){
+        return this.sportinessCharact.is_sportik() && !this.satietyCharact.is_hungry();
     }
 
     @Override
-    public void setSound(Sound sound) {
-
+    public String toString() {
+        return this.name + ", " + this.sportinessCharact.get_charact() + ", "+ this.satietyCharact.get_charact() + ", вдохновлён ли: " + this.isInspired();
     }
 }

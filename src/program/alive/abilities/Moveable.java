@@ -1,4 +1,4 @@
-package program.alive;
+package program.alive.abilities;
 
 import program.inanimate.Going;
 import program.inanimate.Route;

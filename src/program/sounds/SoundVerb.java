@@ -5,8 +5,8 @@ public enum SoundVerb {
     WHISPER("шепча"),
     SING("напевая"),
     PRAY("моля"),
-    TALK("говоря");
-
+    TALK("говоря"),
+    CRY("крикнул");
     private final String how_to_sound;
     SoundVerb(String how_to_sound){
         this.how_to_sound = how_to_sound;

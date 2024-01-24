@@ -1,9 +1,11 @@
-package program.alive;
+package program.inanimate;
 
+import program.alive.Mammal;
+import program.alive.abilities.Moveable;
 import program.inanimate.Going;
 import program.inanimate.Route;
 
-public class MovingManager implements Moveable{
+public class MovingManager implements Moveable {
     public Route route;
     public Mammal person;
 
@@ -26,7 +28,6 @@ public class MovingManager implements Moveable{
     public String getPreviousLocation(Going going){
         return this.person.get_name() + " "+ going.getGoing() +" "+ " дошёл до "+ this.route.getPreviousLocation().getLocation();
     }
-
 
     public void go(){
         this.route.next();

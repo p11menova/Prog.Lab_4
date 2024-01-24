@@ -25,6 +25,6 @@ public class Sound {
     }
 
     public String getSound() {
-        return this.getSound_text() + " " + this.getSound_verb() + " " + this.getSound_volume();
+        return this.getSound_volume().getSoundVolume() +" " + this.getSound_verb().getSoundVerb() + ": " +this.getSound_text();
     }
 }
